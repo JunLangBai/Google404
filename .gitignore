@@ -1,0 +1,19 @@
+# Unity generated files
+[Ll]ibrary/
+[Tt]emp/
+[Aa]ssets/AssetStoreTools*
+
+# User-specific files
+[Dd]ebug/
+[Dd]ebugfs/
+*.pidb
+*.user
+*.userprefs
+.idea/
+
+# Build results
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+[Tt]estResults/
