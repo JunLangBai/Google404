@@ -95,4 +95,18 @@ public class PlayerMove : MonoBehaviour
     {
         return rb.velocity.magnitude; // 返回当前速度的大小
     }
+    
+    //障碍物碰撞检测
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            // 遇到障碍物失败，暂停游戏
+            GameController.Instance.PauseGame();
+        }
+    }
 }
