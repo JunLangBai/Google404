@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
@@ -20,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     private float moveInput;
     private bool isGrounded;   //是否地面
     private bool readyToJump;  //是否允许跳跃
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); //获取玩家刚体组件

@@ -4,9 +4,9 @@ public class ObstacleManager : MonoBehaviour
 {
     public GameObject[] obstaclePrefabs;  // 障碍物预制体数组
     public Transform spawnPoint;          // 障碍物生成点
-    public float spawnInterval = 3f;      // 生成障碍物的时间间隔
-    public float obstacleSpeed = 5f;      // 障碍物移动速度
-    public float destroyDistance = 15f;   // 超出视野的距离
+    public float spawnInterval = 1.5f;      // 生成障碍物的时间间隔
+    public float obstacleSpeed = 7f;      // 障碍物移动速度
+    public float destroyDistance = 27f;   // 超出视野的距离
 
     private float spawnTimer;
 
