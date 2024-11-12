@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class InfiniteBackground : MonoBehaviour
@@ -5,6 +6,7 @@ public class InfiniteBackground : MonoBehaviour
     public float speed = 7f;            // 背景移动速度
     public float backgroundWidth = 26f; // 背景片段的宽度
     public Transform player;            // 玩家或摄像机
+    public Rigidbody2D playerRigidbody; // 玩家 Rigidbody2D
     public float destroyDistance = 12f; // 离开摄像机时销毁的距离
 
     private GameObject[] _backgrounds;   // 用于存储激活的背景片段
@@ -38,6 +40,13 @@ public class InfiniteBackground : MonoBehaviour
 
         // 检查背景片段是否离开视野并回收
         CheckBackgroundPosition();
+
+    }
+
+    private void FixedUpdate()
+    {
+        //玩家也随着背景移动
+        MovePlayer();
     }
 
     void MoveBackground()
@@ -66,6 +75,23 @@ public class InfiniteBackground : MonoBehaviour
             // 激活当前背景片段，并更新索引
             _backgrounds[_currentIndex].SetActive(true);
             _currentIndex = nextIndex;
+        }
+    }
+    
+    void MovePlayer()
+    { 
+        // 如果玩家没有按下左右键（即没有主动控制水平移动），则由背景控制
+        if (playerRigidbody != null && Mathf.Approximately(playerRigidbody.velocity.x, 0f))
+        {
+            // 角色的目标移动速度与背景的速度一致
+            float targetSpeed = -speed;  // 角色应该朝左侧移动，与背景一致
+            playerRigidbody.velocity = new Vector2(targetSpeed, playerRigidbody.velocity.y);
+        }
+        else
+        {
+            // 让玩家自己控制水平移动（如果玩家有输入）
+            float targetSpeed = playerRigidbody.velocity.x;  // 玩家自己控制的水平速度
+            playerRigidbody.velocity = new Vector2(targetSpeed, playerRigidbody.velocity.y);
         }
     }
 }
