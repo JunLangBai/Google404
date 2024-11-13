@@ -109,5 +109,10 @@ public class PlayerMove : MonoBehaviour
             // 遇到障碍物失败，暂停游戏
             GameController.Instance.PauseGame();
         }
+        else if (collision.gameObject.CompareTag("DeathWall"))
+        {
+            // 碰到死亡判定区，暂停游戏
+            GameController.Instance.PauseGame();
+        }
     }
 }

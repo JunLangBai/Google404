@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObstacleManager : MonoBehaviour
 {
@@ -9,6 +11,11 @@ public class ObstacleManager : MonoBehaviour
     public float destroyDistance = 27f;   // 超出视野的距离
 
     private float spawnTimer;
+
+    private void Start()
+    {
+        obstacleSpeed = GameController.Instance.levelSpeed;
+    }
 
     void Update()
     {
