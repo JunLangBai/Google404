@@ -237,6 +237,7 @@ MonoBehaviour:
   playerMove: {fileID: 309339836}
   speedText: {fileID: 1310670876}
   coinText: {fileID: 206965386}
+  speedManager: {fileID: 0}
   levelSpeed: 7
 --- !u!4 &275000957
 Transform:
@@ -611,7 +612,7 @@ Transform:
   m_GameObject: {fileID: 573800899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.76, y: -1.51, z: 0}
+  m_LocalPosition: {x: 12.11, y: -0.56, z: 0}
   m_LocalScale: {x: 2.103406, y: 2.274451, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -708,6 +709,83 @@ PolygonCollider2D:
       - {x: -0.2539487, y: -0.44599807}
       - {x: -0.36933994, y: -0.46267992}
   m_UseDelaunayMesh: 0
+--- !u!1 &760510864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 760510866}
+  - component: {fileID: 760510865}
+  m_Layer: 0
+  m_Name: DeathWall2
+  m_TagString: DeathWall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &760510865
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760510864}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &760510866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760510864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.75, y: -0.36, z: 0}
+  m_LocalScale: {x: 1, y: 11.6099, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &827072612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,3 +1393,4 @@ SceneRoots:
   - {fileID: 2109237657}
   - {fileID: 275000957}
   - {fileID: 1048578760}
+  - {fileID: 760510866}

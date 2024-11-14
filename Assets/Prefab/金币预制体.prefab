@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2363912025075971805}
   - component: {fileID: 8170781125745898621}
   - component: {fileID: 2006204636907173242}
-  - component: {fileID: 7617340932663667123}
   - component: {fileID: 8990724947991600722}
   m_Layer: 0
   m_Name: "\u91D1\u5E01\u9884\u5236\u4F53"
@@ -113,18 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
---- !u!114 &7617340932663667123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253517225511074376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347638c620d0dd24db5fdab39ecafc94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &8990724947991600722
 CircleCollider2D:
   m_ObjectHideFlags: 0
