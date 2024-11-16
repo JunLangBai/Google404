@@ -13,7 +13,8 @@ public class CoinMove : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
+        moveSpeed = GameController.Instance.levelSpeed;
         TakeCoinMove();
     }
 

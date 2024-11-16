@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+
 
 //管理游戏状态
 
@@ -45,23 +47,13 @@ public class GameController : MonoBehaviour
 
     public void PauseGame()
     {
-        float targetTimeScale = 0.2f; // 目标时间缩放
-        float pauseDuration = 1f; // 渐变暂停的持续时间（秒）
-        float pauseStartTime; // 暂停开始的时间
-        
         if (isPaused) return; // 如果已经暂停，直接返回
-        
-        pauseStartTime = Time.time; // 记录暂停开始的时间
 
-        // 直接将暂停操作分配给时间缩放
-        Time.timeScale = Mathf.Lerp(1f, targetTimeScale, (Time.time - pauseStartTime) / pauseDuration);
-    
-        // 等到时间缩放接近目标值
-        if ((Time.time - pauseStartTime) >= pauseDuration)
-        {
-            Time.timeScale = targetTimeScale; // 确保最终到达目标时间缩放
-            isPaused = true; // 设置暂停状态为 true
-        }
+        float targetTimeScale = 0f; // 完全暂停
+        float pauseDuration = 1f; // 渐变暂停的持续时间（秒）
+        float pauseStartTime = Time.time; // 记录暂停开始的时间
+
+        StartCoroutine(PauseCoroutine(pauseStartTime, targetTimeScale, pauseDuration));
     }
 
     public void RestartGame()
@@ -70,6 +62,7 @@ public class GameController : MonoBehaviour
         score = 0;
         scoreText.text = "得分: " + score;
         Time.timeScale = 1;
+        speedManager.ResetSpeed();
     }
 
     public void SpeedUp()
@@ -92,5 +85,18 @@ public class GameController : MonoBehaviour
     public void UpdateCoinText()
     {
         coinText.text = "金币: " + _coinCount;
+    }
+    
+    private IEnumerator PauseCoroutine(float pauseStartTime, float targetTimeScale, float pauseDuration)
+    {
+        while (Time.time - pauseStartTime < pauseDuration)
+        {
+            float t = (Time.time - pauseStartTime) / pauseDuration;
+            Time.timeScale = Mathf.Lerp(1f, targetTimeScale, t);
+            yield return null;  // 等待一帧继续执行
+        }
+
+        Time.timeScale = targetTimeScale; // 确保最终到达目标时间缩放
+        isPaused = true; // 设置暂停状态为 true
     }
 }

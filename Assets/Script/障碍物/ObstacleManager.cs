@@ -19,6 +19,7 @@ public class ObstacleManager : MonoBehaviour
 
     void Update()
     {
+        obstacleSpeed = GameController.Instance.levelSpeed;
         // 生成障碍物
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= spawnInterval)

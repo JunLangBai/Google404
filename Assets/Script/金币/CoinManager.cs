@@ -21,6 +21,8 @@ public class CoinManager : MonoBehaviour
 
     void Update()
     {
+        
+        
         // 每帧检查是否到了生成金币的时间
         if (Time.time >= _nextSpawnTime)
         {
