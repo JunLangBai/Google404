@@ -22,6 +22,20 @@ public class PlayerMove : MonoBehaviour
     private bool isGrounded;   //是否地面
     private bool readyToJump;  //是否允许跳跃
     
+    [Header("Dash")]
+    
+    //冲刺速度
+    public float dashSpeed = 10f;
+    //判断冲刺
+    private bool isDashing;
+    //冲刺冷却
+    public float dashCooldown = 2f;
+    //冲刺持续时间
+    public float dashDuration = 0.3f;
+    private float lastDClickTime = -1f; // 上次按下D键的时间
+    private float dashTime = 0f; // 当前冲刺时间
+    private float dashCooldownTime = 0f; // 当前冲刺冷却时间
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); //获取玩家刚体组件
@@ -60,12 +74,42 @@ public class PlayerMove : MonoBehaviour
     {
         //获取玩家输入
         moveInput = Input.GetAxisRaw("Horizontal");
+        
+        // 检测双击D键
+        if (Input.GetKeyDown(KeyCode.D) && dashCooldownTime <= 0f)
+        {
+            if (Time.time - lastDClickTime <= 0.3f) // 判断双击时间间隔
+            {
+                isDashing = true;
+                dashTime = dashDuration; // 设置冲刺时间
+                dashCooldownTime = dashCooldown; // 重置冷却时间
+            }
+            lastDClickTime = Time.time;
+        }
     }
 
     public void MovePlayer()
     {
+        
+        // 更新冲刺冷却时间
+        if (dashCooldownTime > 0f)
+        {
+            dashCooldownTime -= Time.deltaTime; // 冷却倒计时
+        }
+
+       
+        // 处理冲刺
+        if (isDashing)
+        {
+            rb.velocity = new Vector2(dashSpeed * Mathf.Sign(moveInput), rb.velocity.y);
+            dashTime -= Time.deltaTime;
+            if (dashTime <= 0)
+            {
+                isDashing = false; // 冲刺结束
+            }
+        }
         //玩家移动
-        if (moveInput != 0)
+        else if (moveInput != 0)
         {
             rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
         }
@@ -95,6 +139,12 @@ public class PlayerMove : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return rb.velocity.magnitude; // 返回当前速度的大小
+    }
+    
+    // 提供一个公共方法让其他脚本访问当前冷却时间
+    public float GetDashCooldownTime()
+    {
+        return dashCooldownTime / dashCooldown;
     }
     
     //障碍物碰撞检测

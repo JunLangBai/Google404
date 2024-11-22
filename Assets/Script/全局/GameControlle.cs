@@ -22,7 +22,8 @@ public class GameController : MonoBehaviour
     [Header("GlobelData")]
     public SpeedManager speedManager; // 引用 SpeedManager 脚本
     public float levelSpeed = 7f;
-
+    [Header("SkillDash")]
+    public Image skillIconImage;           // 引用技能图标的 Image 组件
     void Awake()
     {
         if (Instance == null)
@@ -32,6 +33,8 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         levelSpeed = speedManager.GetLevelSpeed();
+        DashCoolTime();
+
     }
 
     public void IncrementScore()
@@ -50,7 +53,7 @@ public class GameController : MonoBehaviour
         if (isPaused) return; // 如果已经暂停，直接返回
 
         float targetTimeScale = 0f; // 完全暂停
-        float pauseDuration = 1f; // 渐变暂停的持续时间（秒）
+        float pauseDuration = 0.4f; // 渐变暂停的持续时间（秒）
         float pauseStartTime = Time.time; // 记录暂停开始的时间
 
         StartCoroutine(PauseCoroutine(pauseStartTime, targetTimeScale, pauseDuration));
@@ -86,7 +89,18 @@ public class GameController : MonoBehaviour
     {
         coinText.text = "金币: " + _coinCount;
     }
-    
+
+    public void DashCoolTime()
+    {
+        // 获取冷却时间比例
+        float cooldownRatio = playerMove.GetDashCooldownTime();
+
+        // 更新技能图标的填充进度
+        skillIconImage.fillAmount = 1 - cooldownRatio; // 冷却时间比例越大，技能图标的填充越小
+    }
+
+
+
     private IEnumerator PauseCoroutine(float pauseStartTime, float targetTimeScale, float pauseDuration)
     {
         while (Time.time - pauseStartTime < pauseDuration)
